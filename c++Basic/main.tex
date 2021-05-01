@@ -16,6 +16,7 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 
+
 \usepackage[breakable, listings, skins, minted]{tcolorbox}
 \usepackage{etoolbox}
 
@@ -78,15 +79,18 @@
 \lstset{basicstyle=\ttfamily, keywordstyle=\bfseries}
 
 \setCJKmainfont{Noto Sans CJK TC}
+\setmonofont{CascadiaCode.ttf}
+% \setmonofont{Consolas}
 \XeTeXlinebreaklocale "zh"             %這兩行一定要加，中文才能自動換行
 \XeTeXlinebreakskip = 0pt plus 1pt     %這兩行一定要加，中文才能自動換行
-\title{C++ Basic}
+\title{武陵資訊讀書會講義}
 \author{李杰穎}
 \date{\today} %不要日期
 
 \setlength{\parindent}{2em}
-\setlength{\parskip}{1em}
+\setlength{\parskip}{0.5em}
 
+\renewcommand{\baselinestretch}{1.5}
 
 
 \begin{document}
@@ -95,9 +99,9 @@
 
 \chapter{前言}
 \section{課程介紹}
-第一堂課，不先來介紹一下讀書會做什麼感覺怪怪的吧。
+先來介紹一下資訊讀書會吧！
 
-資訊讀書會是去年才新成立的讀書會。我們上學期會教C++的語法/演算法，而下學期主要是C++算法的加強及一些如何做專題的技巧。下學期也有可能會用Python和PyTorch來上一點人工智慧的部份。課表部份未來應該會公佈在課程網站上。
+資訊讀書會是去年 (2019) 才新成立的讀書會。我們上學期會教C++的語法/演算法，而下學期主要是C++算法的加強及一些如何做專題的技巧。下學期也有可能會用Python和PyTorch來上一點人工智慧的部份。課表部份未來應該會公佈在課程網站上。
 
 前面兩堂課主要是上最基礎的語法，所以我們會採用發講義的形式讓大家可以看著講義練習寫寫看題目。當然，講師會先把講義內容清楚的帶過一次在讓你們寫練習題。如果在寫練習題的過程中有遇到困難也可以詢問各個講師。
 
@@ -109,7 +113,9 @@
 	\item \href{https://notepad-plus-plus.org/}{\underline{NotePad++}}：超級威力加強板的windows內建筆記本，支援程式碼highlighting，啟動很快。如果專注在打code或驗測資之類的也可以考慮用這款。
 	\item \textbf{其他 (Sublime Text, Eclipse IDE, vim, nano, emacs, far file manager...)}：一些在打competitive programming在用的編輯器 or IDE，有興趣可以去網路上找找看相關的資料。
 \end{itemize}
-我個人對於有沒有一種完美的編輯器沒什麼想法啦，大家可以去嘗試看看，找到對自己打code最方便的工具囉。
+
+大家可以慢慢嘗試，找出自己最喜歡的編輯器喔。
+
 
 
 \section{課程網站及線上批改系統(Online Judge)}
@@ -118,10 +124,10 @@
 	\item \textbf{Online Judge}(\url{http://wloj.wlsh.tyc.edu.tw}(WLOJ))：如果有在刷題的人應該對這個名字不太陌生。Online Judge(或簡稱OJ)就是一個會有許多程式題目的網站，在每一題中，都有題目敘述、輸入、輸出，我們要做的就是寫一個程式滿足題目敘述，使當輸入輸進來時程式都可以得到正確的輸出。當你認為你已經把程式寫完了，就可以把原始碼上傳到網站上，網站經過批改後，就會告訴你的程式是不是好的(\textcolor{ForestGreen}{Accepted(AC)})或者是錯的(\textcolor{red}{Wrong Answer(WA)})或者是編譯錯誤(\textcolor{orange}{Compile Error(CE)})又或者程式是否超過了題目所限制的資源(時間、記憶體等)(\textcolor{orange}{Time Limit Exceeded(TLE), Memory Limit Exceeded(MLE)})
 \end{itemize}
 
-\section{網路資源}
 \section{教學資源}
 \begin{itemize}
 \item \href{https://tw-csie-sprout.github.io/c2020/#!index.md}{\underline{2020資訊之芽語法班}}：資訊之芽語法班是台大和清大一起合開的課，在清大和台大都有開課。他們會把上課的內容全部丟到網路上讓有需要的人可以學習。
+\item \href{https://www.csie.ntu.edu.tw/~sprout/algo2020/}{\underline{2020 資訊之芽算法班}}：資訊之芽算法班是更為進階的課程，只有在台大開課。對算法班課程有興趣的人可以關注一下資訊之芽的粉絲專頁，他們每年大約寒假的時候就會有課程報名的消息了。
 \item \href{www.geeksforgeeks.org}{\underline{GeeksForGeeks}}：國外的網站，有很多語法和算法的教學，如果對某個語法或算法不熟可以上去找一下。
 \end{itemize}
 \section{Online Judge}
@@ -129,6 +135,8 @@
 \item \href{https://neoj.sprout.tw/}{\underline{Sprout OJ}}：資訊之芽的OJ，上面有各種難度的題目，有興趣的可以刷刷看。
 \item \href{https://zerojudge.tw}{\underline{ZeroJudge}}：應該是台灣最大的OJ, 題目超級多，幾乎不可能刷完。水題偏多(至少前30題都滿水的)，但還是有不錯的題目。
 \item \href{https://onlinejudge.org/}{\underline{UVa Online Judge}}：全世界第一個OJ，想當然爾題目非常的多。缺點是網站的界面有點不太直觀，但似乎準備要更新了。
+\item \href{https://codeforces.com}{\underline{CodeForces}}：全世界最大的線上程式競賽網站，題目相當有水準，如果上面的題目都解不出來也不要太挫折喔。
+\item \href{https://csacademy.com/}{\underline{CS Academy}}：CS Academy 上面有很多不錯的題目，而且每題都會分成Easy, Medium及Hard。大家可以看自己的解題情況決定要怎麼刷題喔。
 \end{itemize}
 
 
@@ -764,7 +772,7 @@ int main(){
 
 ㄟ感覺滿對的喔，然後丟到Dev-C++編譯也是對的，這有甚麼錯呢？其實在C++的標準中，陣列長度內放變數是不正確的，有些編譯器不會接受這種寫法，所以盡量不要這樣寫喔(雖然我有時候也這樣寫www，不過不要學我)。
 
-那有沒有其他方式可以讓陣列長度放變數呢？答案是有的，不過這是高階的寫法：
+那有沒有其他方式可以讓陣列長度放變數呢？答案是有的，不過是使用C++ STL中的\texttt{vector}的寫法：
 \begin{code}
 \captionof{listing}{高階寫法}
 \begin{minted}
@@ -783,7 +791,7 @@ int main(){
 \section{二維陣列}
 在C++中，陣列除了有一維的形式，還可以二維的形式存在，這就是二維陣列。
 \subsection{宣告}
-二維陣列宣告的方式如下：``資料型態\textbf{ }變數名稱[ 長度一 ][ 長度二 ];"，像如果想要宣告一個資料型態為\texttt{int}且長度一為4、長度二則為3的A陣列，其程式碼就會像下面那樣。
+二維陣列宣告的方式如下：``資料型態 \ 變數名稱[長度一][長度二];"，像如果想要宣告一個資料型態為\texttt{int}且長度一為4、長度二則為3的A陣列，其程式碼就會像下面那樣。
 \begin{code}
 \captionof{listing}{二維陣列的宣告}
 \begin{minted}
@@ -838,7 +846,7 @@ int main(){
 \centering
 \includegraphics[width=0.7\textwidth]{3d_array.png}
 \caption{多維陣列？}
-\label{2d_array}
+\label{xd_array}
 \end{figure}
 除了二維陣列以外，我們可以在宣告時加上更多的方括號，成為多維陣列。
 
@@ -921,12 +929,15 @@ int main(){
 \end{minted}
 \end{code}
 \subsection{宣告}
-首先看到main function的第一行，字元陣列宣告方式為"char 字元陣列名稱[字串長度]"。此外，也可以引入<cstring>標頭檔，宣告方式為 "string 字串名稱"。
+首先看到main function的第一行，字元陣列宣告方式為"char 字元陣列名稱[字串長度]"。此外，也可以引入<cstring>標頭檔，宣告方式為 ``string 字串名稱"。
 \subsection{存取}
-再來是第3\~5行，先前兩種宣告方式都可以
-1.讀入整行字串(第4行)。若用cin>>讀入，會讀到' ','\textbackslash{}t','\textbackslash{}n'為止。
-2.存取字串中某個字元(第5行)。
-3.存取整個字串(第6行)。在每個字串的最後，皆會有'\textbackslash0'作結。故輸出到'\textbackslash0'時，會停止輸出。
+再來是第$3 \sim 5$行，先前兩種宣告方式都可以
+\begin{enumerate}
+    \item 讀入整行字串(第4行)。若用cin>>讀入，會讀到' ','\textbackslash{}t','\textbackslash{}n'為止。
+    \item 存取字串中某個字元(第5行)。
+    \item 存取整個字串(第6行)。在每個字串的最後，皆會有'\textbackslash0'作結。故輸出到'\textbackslash0'時，會停止輸出。
+\end{enumerate}
+
 \subsection{初始化}
 
 \begin{code}
@@ -943,7 +954,8 @@ int main(){
 }
 \end{minted}
 \end{code}
-在初始化時，可以char型態的陣列一樣以char分開儲存。但這樣太麻煩了，所以我們可以用雙引號(")將字串夾起來。在main function中的第4行是錯誤的，為什麼呢?這是因為字串會以'\textbackslash0'結尾，所以若用字元陣列宣告的字串長度必須加1。
+在初始化時，可以char型態的陣列一樣以char分開儲存。但這樣太麻煩了，所以我們可以用雙引號(")將字串夾起來。在main function中的第4行是錯誤的，為什麼呢?這是因為字串會以\texttt{'0'}結尾，所以若用字元陣列宣告的字串長度必須加1。
+
 \subsection{文字處理函式}
 \url{https://en.cppreference.com/w/cpp/string/byte}有詳細整理各種函式，以下整理常用函式。
 
@@ -975,7 +987,288 @@ to**系列，將字元轉成**：
 \item \texttt{toupper(字元)}：轉成大寫
 \end{itemize}
 % \chapter{Struct}
-\chapter{亂數}
+
+\chapter{資料結構 Data Structure}
+
+相信大家都是C或者C++的使用者。
+
+如果你C的使用者，強烈建議你現在開始使用C++。語法相容，但又有強力的library，是你在競賽時間壓力下不可或缺的強力工具。
+
+如果你是C++的使用者，強烈建議你把C++內建又好用的東西摸熟。這樣就可以省去許多功夫，開心使用前人為你寫好的東西了。
+
+\section{什麼是資料結構}
+就是字面上的意思：儲存資料的結構。
+
+像前面有提到的陣列就是一種資料結構，它直接把一堆同樣型別的資料排成一排好好管理。但除了陣列之外，還有許多資料結構（有些甚至不是內建的）是需要瞭解的。以下就講些簡單常用的內建資料結構吧。
+
+這些資料結構在「標準模板庫」（Standard Template Library，簡稱 STL）之中，是一個C++ 的程式庫。注意，這個程式庫的所有東西都在 \texttt{namespace std} 底下。
+
+\section{型別模板 (Template)}
+
+不過在繼續之前，有個重要的 C++ 觀念要講。
+
+試想有一個作為容器用的型別 \texttt{C}，可以容納一些型別是給定的型別 \texttt{T} 的東西。那你
+在宣告這樣的一個變數時，理論上你應該告訴編譯器這個變數容納的型別是哪個型別。然而 C 語言中並沒有這樣的語法，所以在這樣的需求下模板（template）就在 C++ 誕生了。
+
+型別模板的功用就是生出一堆新的型別。比方說剛剛的 \texttt{C} 好了，存放 \texttt{int} 型別的 \texttt{C} 和存放 \texttt{double} 型別的 \texttt{C}，型別應該要是不同的。所以在宣告一個變數時，不是寫「\texttt{C (變數名)}」，而是寫「\texttt{C<(int 或 double)> (變數名)}」以指定這個變數的型別要是存放 int 的那種型別，還是存放 double 的那種型別。
+
+有些型別模板的參數不只一個，寫好寫滿就對了（例：\texttt{priority\_queue<A, B, C>} 就需要三個型別）。如果沒有寫好寫滿，會自動採用預設的型別（前提是要有預設的）。
+
+想瞭解更多的話，關鍵字搜「模板」跟「C++」吧。
+
+註：C++11 開始，模板的參數數是可變的。
+
+\section{迭代器 (Iterator)}
+
+設想有個容器 \texttt{C}，裡面已經裝一些東西了。我該如何遍歷 \texttt{C} 中的所有元素呢？要知道 C 可能長得不像陣列，沒有「下標」這種東西。為了解決這個問題，C++ STL 為每個容器提供一個成員型別，叫做「迭代器」。
+
+你可以把迭代器想像成是指標（事實上，指標也算一種迭代器）。如果你今天有一個迭代器 \texttt{i}，存取 \texttt{i} 指向的內容的方法，跟指標一樣，是在前面加個星號（\texttt{*i}）。而迭代器分成三種，取決於迭代器能進行的運算，由功能強到弱排序如下：
+\begin{enumerate}
+    \item 隨機存取 (Random Access) 迭代器：這這類迭代器能夠和整數做加減法，加 s 代表從這項開始往後數 s 項，減 s 代表往前數 s 項。當然，遞增、遞減運算也沒有問題。你可以把指標當作這種迭代器。
+    
+    \item 雙向 (Bidirectional) 迭代器：這類的迭代器只能做遞增（\texttt{++}）和遞減（\texttt{--}）運算，分別代表後一項和前一項。
+    \item 單向 (Forward) 迭代器：這類的迭代器只能做遞增（\texttt{++}），代表後一項。
+\end{enumerate}
+
+而按照迭代器的使用方法，分成兩種：
+\begin{enumerate}
+    \item 輸入 (Input) 迭代器：當你只有要讀取迭代器指向的內容時，這時迭代器當作輸入迭代器使用。所有的迭代器都可以當作輸入迭代器。
+    \item 輸出（Output）迭代器：當你要直接更改迭代器指向的內容時，這時迭代器當作輸出迭代器使用。除了常數（const）迭代器（也就是規定不能更動迭代器指向的內容）以外， 所有的迭代器都可以當作輸出迭代器。    
+\end{enumerate}
+
+C++ 內建的迭代器都很和藹，只要是可以做的運算，複雜度都是 O(1)。
+
+為了滿足人們的需求，C++ 內建的容器通常有兩種迭代器：正常的迭代器以及逆向迭代器。假如容器的型別是 \texttt{C}，因為迭代器是原本型別的成員型別，宣告時名稱分別是\texttt{C::iterator} 和 \texttt{C::reverse\_iterator}。前者會從前迭代到後，後者會從後迭代到前。另外，每個容器 \texttt{c} 的兩種迭代器各有兩個迭代器代表頭尾，分別是\texttt{c.begin()、c.end()} 和 \texttt{c.rbegin、c.rend()}。\texttt{c.begin()} 指向 \texttt{c} 的第一項，而 \texttt{c.end()} 指向 \texttt{c} 的最後一項的\textbf{後一項}。也就是說，\texttt{*c.end()、*c.rend()} 是不存在的，如果你這樣寫會造成不可預期的後果。
+
+\section{vector}
+
+vector位於標頭檔 \texttt{<vector>}中，vector可以視為動態陣列的實現。一般的陣列在宣告時就確定了，然而vector的長度可以任意伸縮。
+
+以下vector的常用語法 (假設變數名為 \texttt{v})：
+
+\begin{enumerate}
+    \item (建構式) \texttt{vector<T> v(size\_type a, const T\& b)}：一開始這個\texttt{v}會被 \texttt{b}填滿，總共填 \texttt{a} 個。如果只有指定\texttt{a}，那麼\texttt{b}會是\texttt{T}的預設值。如果\texttt{a, b}都沒有指定，那\texttt{v}會是一個空的vector。建構複雜度$O(a)$。
+    \item \texttt{v[i]}：\texttt{v}中第 \texttt{i} 項，就把這個語法想成陣列就好。複雜度$O(1)$。
+    \item \texttt{v.size()}：這個函式會回傳 \texttt{v} 目前的長度。複雜度$O(1)$。
+    \item \texttt{v.push\_back(T a)}：在 \texttt{v} 的尾端加一個 \texttt{a}。均攤複雜度$O(1)$。
+    \item \texttt{v.pop\_back()}：刪除 \texttt{v} 的最末項。如果\texttt{v}是空的，會發生不可預期的結果。複雜度$O(1)$。
+    \item \texttt{v.clear()}：清空 \texttt{v}。複雜度 $O(size)$。原本 \texttt{v} 的空間會被保留，不會釋放掉。
+    \item \texttt{v.resize(size\_type a, const T\& b)}：強制將 \texttt{v} 的長度變為 \texttt{a}。如果比原本短，則將 \texttt{v} 原本的末段捨去，複雜度 $O(D(size − a))$，$D$ 是解構 \texttt{T} 的時間。如果比原本長，在 \texttt{v} 的後面加 \texttt{b} 直到足夠為止（如果只有指定 \texttt{a}，那麼 \texttt{b} 是 \texttt{T} 的預設值），通常複雜度$O(C(a − size))$，但如果需重新配置記憶體（reallocate），複雜度 $O(Ca)$，其中 $C$ 是建構（複製）\texttt{T} 的時間。
+    \item \texttt{v.reserve(size\_type n)}：預留放至少 $n$ 個 \texttt{T} 的空間。如果需重新配置記憶體，複雜度$O(size)$。如果 $n < size$，這個函數不造成任何影響。
+\end{enumerate}
+
+vector 的迭代器屬於隨機存取(Random Access)迭代器。
+
+比較需要講的是 vector 重新配置記憶體的耗時較長，所以如果能預先知道記憶體最多
+需要多少，就在一開始建構的時候開滿或者先 \texttt{reserve} 吧！（儘管對時間只有常數的影響）
+
+另外，\texttt{vector<bool>} 有神奇優化成一個 bool 佔的空間只有 1 bit，是 \texttt{bool[]} 的 1/8。
+
+\section{string}
+
+string 位於標頭檔\texttt{<string>} 裡，等價於 \texttt{basic\_string<char>}（如果不知道這個，可能會
+看不懂編譯訊息）。string 的用法很像 \texttt{vector<char>}，但因字串太常使用了，所以有經過一些優化。除此之外，還有一些好用的東西（假設變數名為 \texttt{s}）：
+
+\begin{enumerate}
+    \item \texttt{s = t}：如果 \texttt{t} 是一個 string 或是 C 式字串，\texttt{s} 會變得跟 \texttt{t} 一樣。複雜度不明，但通常是$O(size_s + size_t)$。
+    \item \texttt{s += t}：如果 \texttt{t} 是一個 string 或是 C 式字串，在 \texttt{s} 的尾端加上 \texttt{t}。複雜度通常是 $O(size_s+size_t)$。
+    \item \texttt{s.c\_str()}：這個函式會回傳跟 \texttt{s} 一樣的 C 式字串。在 C++11 中保證複雜度為 $O(1)$。
+    \item \texttt{s }（比較大小或相等的符號）\texttt{ t}：回傳比較 \texttt{s} 跟 \texttt{t} 字典序的結果。通常複雜度是$O(max(size_s, size_t))$。
+    \item \texttt{cin >> s}：輸入字串至\texttt{s}，直到讀到空白字元。
+    \item \texttt{cout << s}：輸出字串 \texttt{s}。
+    \item\texttt{getline(cin, s, char c)}：輸入字串至 \texttt{s}，直到讀到字元 \texttt{c}。未指定時，\texttt{c} 是換行符號（\texttt{'\textbackslash n'}）。
+\end{enumerate}
+
+string 的迭代器屬於隨機存取迭代器。
+
+除了列舉的之外，vector 有的 string 都有。除此之外，s.size() 有個同義的函式\texttt{s.length()}，可能是怕人打錯才多加了這個函式吧。
+
+順帶一提，關於 string 是不是「容器」其實也有些爭議，但它有大部分容器的性質，所以在此仍然將其歸類為容器。
+
+\section{deque}
+
+deque 位於標頭檔 \texttt{<deque>} 裡。deque 可以視為可以在最前面加東西、刪東西的vector，除此之外它就是 vector 了。
+
+假設變數名是 \texttt{d}，想要移除第一項，就用 \texttt{d.pop\_front()}。想要在前面加一個東西 \texttt{a}，就用 \texttt{d.push\_front(a)}。這兩個函式不會使迭代器失效，但會改變 deque 的下標。
+
+雖說功能比 vector 強，但代價是時間和空間幾乎翻倍，所以沒事別用 deque。
+
+\section{list}
+list 位於標頭檔 \texttt{<list>} 裡。list 是個「雙向鏈結（doubly linked）結構」，也就是說對於
+list 中的每一項，都可以 $O(1)$ 知道它的前一項和後一項。如此做的好處是，如果我要一次性加入一堆東西，只需要 $O(1)$ 的代價，比 vector 優。然而代價是，存取第 $i$ 項的複雜度是$ O(i)$，因此沒有內建的下標運算。同樣列舉一下常用語法（假設變數名為 \texttt{s}）：
+
+\begin{enumerate}
+    \item （建構式）\texttt{list<T> s(size\_type a, const T\& b)}：同 vector。
+    \item \texttt{s.push\_front(T a)、s.push\_back(T a)、s.pop\_front()、s.pop\_back()}：同 deque。
+    \item \texttt{s.size()}：回傳 \texttt{s} 中有幾項。相當需要注意的是 C++98 中這個函式的複雜度只有保證$O(size)$，C++11 則保證 $O(1)$。
+    \item \texttt{s.empty()}：回傳一個 bool，代表 \texttt{v} 是否是空的。複雜度 $O(1)$。
+    \item \texttt{s.insert(iterator p, T a)}：在 \texttt{p} 指的那一項前面插入一個 \texttt{a} 並回傳一個指向 \texttt{a} 的迭代器。複雜度$O(1)$。
+    \item \texttt{s.insert(iterator p, size\_type n, T a)}：在 \texttt{p} 指的那一項前面插入 \texttt{n} 個 \texttt{a}。複雜度 $O(n)$。
+    \item \texttt{s.erase(iterator p)}：把 \texttt{p} 指的那項刪掉並回傳指向之後那項的迭代器。注意刪完之後 \texttt{p} 就失效了。複雜度 $O(1)$。
+    \item \texttt{s.erase(iterator first, iterator last)}：把 [first,last) 指到的東西全砍光光，回傳 \texttt{last}。複雜度和砍掉的東西個數呈線性關係。
+    \item \texttt{s.splice(iterator p, list\& x, iterator first, iterator last)}：\texttt{first} 和 \texttt{last} 是 \texttt{x} 的迭代器。這個函式會把 [\texttt{first},\texttt{last}) 指到的東西從 x 中移除並加到 p 指的那項前面。注意到 \texttt{x} 會因為這個函式而改變。如果沒有指定 \texttt{last}，那只將 \texttt{first} 從 \texttt{x} 刪去並加入 \texttt{s}。如果 \texttt{first} 和 \texttt{last} 都沒指定，那會將 \texttt{x} 中所有東西移到 \texttt{s} 中使 \texttt{x} 變為空的。複雜度是轉移元素個數的線性。
+\end{enumerate}
+
+list 的迭代器屬於雙向迭代器。
+
+可以看出 list 最大的功能是可以用 $O(1)$ 的代價進行一些別的容器做不到的事（\texttt{insert}、\texttt{erase}）。然而 list 最大的問題是所佔空間過於龐大，而且實用性低。C++11 中多了一個 forward\_list 以改善空間過大的問題，代價是迭代器變成單向迭代器（也因此沒有\texttt{reverse\_iterator}）。
+
+\section{stack}
+
+stack 位於標頭檔 \texttt{<stack>} 裡。可以把它想像成一疊書，每次可以放一本書在最上面，也可以從最上面拿一本書走。簡單來說就是秉持著「後進先出」（LIFO）的精神。
+
+stack 這個模板需要的型別參數有兩個：\texttt{T} 和 \texttt{C}，其中 \texttt{T} 是內容物的型別，而 \texttt{C} 是採用的容器。為了方便改造，stack 對 C 有些要求：要有 \texttt{empty、size、back、push\_back、pop\_back} 這些函式，而在內建的容器中能夠勝任這角色的有 vector、deque 和 list。
+
+stack 常用的語法列舉如下（假設變數名為 \texttt{s}）：
+
+1.（建構式）\texttt{stack<T, C> s(C\& a)}：\texttt{s} 一開始會有一份 \texttt{a} 的複製品。如果沒有指定 \texttt{C} 的話，\texttt{C}是\texttt{deque<T>}。如果沒有指定 \texttt{a} 的話，\texttt{s} 一開始會是空的。複雜度 $O(size)$。
+2. \texttt{s.size()、s.empty()}：同 vector。
+3. \texttt{s.top()}：存取最後一個進入 \texttt{s} 的元素，即「一疊書中最上面的那一本」。複雜度 $O(1)$。
+4. \texttt{s.push()}：將一個元素加入 s 中。複雜度 $O(1)$。
+5. \texttt{s.pop()}：將最後一個進入 s 的元素移除。複雜度 $O(1)$。
+
+至於 \texttt{C} 應該要選用什麼，個人建議是 \texttt{vector<T>}。而且事實上，stack 能做的事 vector都能做到，所以平常用 vector 就可以了。只是用 stack 可以增加程式的可讀性。
+
+
+\section{queue}
+
+queue 位於標頭檔 \texttt{<queue>} 裡。可以把它想像成排隊等著結帳的人群，要嘛有新的人來排在隊伍的尾端，要嘛最前面有一個人結完帳要走了。簡單來說，就是秉持著「先進先出」（First In, First Out; FIFO）的精神。
+
+queue 這個模板同樣需要兩個型別參數 \texttt{T} 和 \texttt{C}，跟 stack 一樣。不過不同的是，queue對 C 的要求不太一樣：要有 empty、size、front、back、push\_back、pop\_front 這些函式，而在內建的容器中能夠勝任這角色的只有 deque 和 list。
+
+queue 常用的語法列舉如下（假設變數名為 \texttt{q}）：
+
+\begin{enumerate}
+    \item （建構式）\texttt{queue<T, C> q(C\& a)}：q 一開始會有一份 \texttt{a} 的複製品。如果沒有指定 \texttt{C} 的話，\texttt{C} 是 \texttt{deque<T>}。如果沒有指定 \texttt{a} 的話，\texttt{q} 一開始會是空的。複雜度 $O(size)$。
+    \item \texttt{q.size()，q.empty()}：同 vector。
+    \item \texttt{q.front()}：存取第一個進入 \texttt{q} 的元素，即「隊伍中最前面的人」。複雜度 $O(1)$。
+    \item \texttt{q.back()}：存取最後一個進入 \texttt{q} 的元素，即「隊伍最末端」。複雜度 $O(1)$。
+    \item \texttt{q.push()}：將一個元素加入 \texttt{q} 中。複雜度 $O(1)$。
+    \item \texttt{q.pop()}：將第一個進入 \texttt{q} 的元素移除。複雜度 $O(1)$。
+\end{enumerate}
+
+建議 \texttt{C} 就依照預設的即可。不過和 stack 一樣，要用 queue 不如用 deque。
+\section{priority\_queue}
+
+\texttt{<queue> }中其實還藏有一威力極大的適配器：priority\_queue。priority\_queue 利用幾個內建函式實現「二叉堆」（binary heap）結構，一個在任何時候維持最頂的元素永遠都是最大的資料結構。priority\_queue 雖然實作容易，但應用廣泛，每次都手刻一次會很浪費時間。以後會見到更多 priority\_queue 的應用。
+
+priority\_queue 這個模板需要三個型別參數 \texttt{T、Con 和 Cmp}。\texttt{T} 代表內容物的型別（需可以比較大小），\texttt{Con} 代表使用的容器，而 \texttt{Cmp} 代表使用的比大小的依據（之後會再詳細說明）。Con 的要求是擁有隨機存取迭代器以及 \texttt{empty、size、front、push\_back、pop\_back}這些函式，而滿足這些條件的內建函式有 vector（預設值）和deque。在詳細地認識 \texttt{Cmp}之前，只需要知道 \texttt{Cmp} 是 \texttt{less<T>}（預設值）時 \texttt{priority\_queue} 是最大堆，而是 \texttt{greater<T>}的時候 \texttt{priority\_queue} 是最小堆。
+
+priority\_queue 常用的語法列舉如下（假設變數名為 \texttt{pq}）：
+
+\begin{enumerate}
+    \item （建構式）\texttt{priority\_queue<T, Con, Cmp> pq}：建構一個空的 \texttt{pq}。複雜度 $O(1)$。
+    \item （建構式）\texttt{priority\_queue<T, Con, Cmp> pq(iterator first, iterator last)}：建構一個 pq，內含\texttt{[first,last)} 指到的東西，這裡 iterator 可以是任何迭代器。複雜度$O(size)$。
+    \item \texttt{pq.size()、pq.empty()}：同 vector。
+    \item \texttt{pq.top()}：回傳 \texttt{pq} 中最大（最小）的元素（無法修改）。複雜度 $O(1)$。
+    \item \texttt{pq.push(T a)}：將 \texttt{a} 加入 \texttt{pq} 中。複雜度 $O(\log size)$。
+    \item \texttt{pq.pop()}：將 \texttt{pq} 中最大（最小）的元素移除。複雜度 $O(\log size)$。
+\end{enumerate}
+
+比較需要注意的是在建構的時候直接餵內容物的時間複雜度是 $O(size)$，而一個一個push進去的時間複雜度是 $O(size \log size)$。雖然一般情況下沒什麼差，不過有必要的時候請記得 priority\_queue 的建構式可以減少複雜度。
+
+\section{pair}
+
+pair 位於標頭檔\texttt{<utility>}裡面（注意沒有 <pair> 這個標頭檔）。pair 其實很單純，就是把兩個（可能不同型別的）變數綁在一起，變成一個變數。為此，pair 需要接收兩個型別，分別代表一對的第一項和第二項的型別。
+
+pair 常用的語法列舉如下（假設變數名為 \texttt{p}）：
+
+\begin{enumerate}
+    \item （建構式）\texttt{pair<A, B> p(A a, B b)}：建構一個把型別 \texttt{A} 和型別 \texttt{B} 綁在一起的 \texttt{p}，其中第一項是 \texttt{a}，第二項是 \texttt{b}。
+    \item \texttt{p = s}：如果 \texttt{s} 也是同型別的 pair，把 \texttt{p} 變得跟 \texttt{s} 一樣。
+    \item \texttt{p}（比較大小或相等的符號）\texttt{s}：如果 \texttt{s} 也是同型別的 pair，先比第一項，如果一樣再比第二項。
+    \item \texttt{p.first、p.second}：存取第一項、第二項。
+\end{enumerate}
+
+在使用 pair 時，常常會使用到一個非成員函式 \texttt{make\_pair}。\texttt{make\_pair} 的好處在於，你不用特別指明第一項和第二項的型別，編譯器會自行幫你解析。用法是 \texttt{make\_pair(A a，B b)}，函式會回傳一個 \texttt{pair<A, B>}，其中第一項是 \texttt{a}，第二項是 \texttt{b}。
+
+另外，C++11 開始允許可變長度的模板，所以也有 pair 的推廣版 tuple（在標頭檔\texttt{<tuple>} 中）。有興趣的可以自己看看。
+
+\section{set}
+
+set 位於標頭檔 \texttt{<set>} 裡。set 實現了自平衡二元查找樹，用白話文來講，可以 $O(\log n)$插入、刪除或查詢一個值有沒有在其中。特別的是，裡面的元素不會重複，因此我們會把元素的值稱為鍵值（key）。
+
+set 的常用語法列舉如下（假設變數名為 \texttt{s}）：
+\begin{enumerate}
+    \item （建構式）\texttt{set<K> s}：建構一個空的 \texttt{s}。複雜度 $O(1)$。
+    \item \texttt{s.size()、s.empty()}：同 vector。
+    \item \texttt{s.insert(K k)}：在 \texttt{s} 中放入一個鍵值為 \texttt{k} 的元素。如果本來就有了，什麼事都不會做。複雜度 $O(\log size)$。
+    \item \texttt{s.erase(iterator first, iterator last)}：刪除 \texttt{[first,last)}。如果沒指定 \texttt{last}，只刪除 \texttt{first}。只刪除一個時，均攤複雜度 $O(1)$，刪除多個時複雜度是刪除個數的線性。
+    \item \texttt{s.erase(K k)}：刪除所有鍵值為 \texttt{k} 的元素並回傳刪除的項數（在 set 中只會是 0 或 1）。複雜度$O(\log size)$。
+    \item \texttt{s.find(K k)}：回傳指向鍵值為 \texttt{k} 的元素的迭代器。如果沒有這種東西，回傳 \texttt{m.end()}。複雜度 $O(\log size)$。
+    \item \texttt{s.count(K k)}：回傳有幾個鍵值為 \texttt{k} 的元素（在 set 中只會是 0 或 1）。複雜度 $O(\log size)$。
+    \item \texttt{s.lower\_bound(K k)}：回傳迭代器指向第一個鍵值大於等於 \texttt{k} 的項。複雜度 $O(\log size)$。
+    \item \texttt{s.upper\_bound(K k)}：回傳迭代器指向第一個鍵值大於 \texttt{k} 的項。複雜度 $O(\log size)$。
+\end{enumerate}
+
+set 的迭代器是雙向迭代器。\texttt{set::iterator} 會由小迭代到大，\texttt{set::reverse\_iterator} 則會由大迭代到小。比較容易被忽視的是 set 的迭代器在遞增和遞減的時候，理論上不只是均攤複雜度，連複雜度也是 $O(1)$。但有些實作只保證均攤複雜度。
+
+要注意的是 \texttt{lower\_bound} 和 \texttt{upper\_bound} 的微妙差別：一個是大於等於、一個是大於。用途通常是找鍵值在 \texttt{[l,u)} 的那些項，找法是 \texttt{[s.lower\_bound(l), s.upper\_bound(u))}。記住，C++ 通常是左閉右開區間。
+
+\section{map}
+map 位於標頭檔 \texttt{<map>} 裡。map 可以當成 set 的每一個元素都對應到另一個值，也就是可以用 $O(\log n)$ 插入、刪除或尋找一個鍵值對應的值。因此，map 這個模板需要兩個型別參數 \texttt{K} 和 \texttt{T}，其中 \texttt{K} 是鍵值的型別（需要可以比大小），而 \texttt{T} 代表對應到的值的型別。
+
+另外，map 中的每一個元素其實是 \texttt{pair<K, T>}，所以迭代器指向的東西是一個 pair，第一項是鍵值，第二項是對應的值。
+
+map 常用的語法列舉如下（假設變數名為 \texttt{m}）：
+
+\begin{enumerate}
+    \item （建構式）\texttt{map<K, T> m}：建構一個空的 \texttt{m}。複雜度 $O(1)$。
+    \item \texttt{m.size()、m.empty()、m.erase(iterator first, iterator last)}\\\texttt{、m.erase(K k)、m.find(K k)、m.count(K k)、m.lower\_bound(K k)、m.upper\_bound(K k)}：同 set。
+    \item \texttt{m[k]}：存取鍵值 \texttt{k} 對應的值。如果 \texttt{k} 沒有對應的值，會插入一個元素，使 \texttt{k} 對應到預設值並回傳之。複雜度 $O(\log size)$。
+    \item \texttt{m.insert(pair<K, T> k)}：如果沒有鍵值為 \texttt{k.first} 的值，插入一個鍵值為 \texttt{k.first} 的值對應到 \texttt{k.second}，並回傳一個 pair，\texttt{first} 是指向剛插入的元素的迭代器、\texttt{second} 是 true；如果已經有了，回傳一個 pair，\texttt{first} 是指向鍵值為 \texttt{k.first} 的元素的迭代器，\texttt{second} 是false。複雜度 $O(\log size)$。
+\end{enumerate}
+
+和 set 的迭代器一樣，map 的迭代器是雙向迭代器。
+
+\section{multiset, multimap}
+
+在 \texttt{<set>、<map>} 中分別還有 multiset 和 multimap。和前面大致相同，唯一的差別在於 multiset 和 multimap 中鍵值可以重複出現，不像 set 和 map 鍵值不能一樣。如此一來，\texttt{count} 和 \texttt{erase} 回傳的值便不一定是 0 或 1。此外，由於 multimap 中一個鍵值可能對應到許多不同的值，因此也不支援下標操作。
+
+在 multiset 和 multimap 中有一個特別好用的函式 \texttt{equal\_range(K k)}，會回傳一個 iterator的 pair，第一項代表\texttt{lower\_bound(k)}，第二項代表 \texttt{upper\_bound(k)}。這兩項迭代器之間的項就是那些鍵值是 \texttt{k} 的項。雖然這個函式 set 跟 map 也有，但在 set 和 map 中就顯得有點雞肋。
+
+\section{(C++11)unordered\_(multi)set, unordered\_(multi)map}
+在 C++11 以後，unordered 系列常常擔任優化掉 map 和 set $O(\log n)$ 複雜度的角色。
+
+unordered\_(multi)set 和 unordered\_(multi)map 分別在標頭檔 \texttt{<unordered\_set> 和 <unordered\_map>} 裡。這四個模板需要的前一（二）個型別參數和 set（map）一樣，而接著是一個型別Hash，代表要使用的雜湊函數的函數型別（之後會提）或指標。不過 C++11 有預設的內建型別（含任意型別的指標）的雜湊函數，所以除非情況特殊，你可以不用理會這一項。
+
+你可以把 unordered 系列當成 (multi)map 和 (multi)set 來用。不過有幾點不同：
+\begin{enumerate}
+    \item unordered 系列的迭代器為單向迭代器。
+    \item unordered 系列沒有將所有項依鍵值排序（這也是它名字的由來），因此迭代器在遍歷容器時不會依鍵值的大小順序遍歷。
+    \item 因為沒有排序，所以理所當然的沒有 lower\_bound、upper\_bound。
+    \item 比起 (multi)map 和 (multi)set，unordered 系列的期望複雜度少一個 $\log$。
+\end{enumerate}
+
+在宣告變數（建構式）時，你可以指定 bucket 至少有幾個。如果鍵值是內建型別而且你沒有指定 bucket 至少有幾個，那麼它會很耐斯地幫你搞定。
+
+\section{bitset}
+
+bitset 位於標頭檔 \texttt{<bitset>} 裡。你可以把它想像成有一堆 0 跟 1 的一個陣列，也就是說 bitset 的大小是固定的。但是它每一項只會用到 1 bit 的空間，而 bitset 的位元運算是被優化過的（雖然只限於同大小的 bitset），運作起來非常快速，對常數有極巨大的影響，同時也可以達到壓縮空間的效用，是常數優化的好幫手。
+
+bitset 這個模板需要一個整數 \texttt{n} 作為模板的參數，代表 bitset 的長度。
+　　 
+bitset 的一些常用語法列舉如下（假設變數名為 \texttt{b}）：
+\begin{enumerate}
+    \item （建構式）\texttt{bitset<N> b(a)}：用 \texttt{a} 初始化一個長度為 \texttt{N} 的 bitset。這裡 \texttt{a} 可以是 unsigned long、string 或 C 式字串。如果沒有指定 \texttt{a}，或者如果 \texttt{b} 有一些地方沒被 \texttt{a} 初始化，那些地方預設為 0。
+    \item \texttt{b.count()}：回傳 \texttt{b} 有幾個位元是 1。複雜度 $O(N)$。
+    \item \texttt{b.size()}：回傳 \texttt{b} 有幾個位元。複雜度 $O(1)$。
+    \item \texttt{b （位元運算）}：不管是一元還是二元的位元運算都可以。如果是兩個 bitset 的二元位元運算，兩個 bitset 的長度需一致。複雜度 $O(N)$。
+    \item \texttt{b[a]}：存取第 \texttt{a} 位。複雜度 $O(1)$。
+    \item \texttt{b.set()}：將所有位元設為 1。複雜度 $O(N)$。
+    \item \texttt{b.reset()}：將所有位元設為 0。複雜度 $O(N)$。
+    \item \texttt{b.flip()}：將所有位元的 0、1 互換（反白）。複雜度 $O(N)$。
+    \item \texttt{b.to\_string()}：回傳一個字串和 \texttt{b} 的內容一樣。複雜度 $O(N)$。
+    \item \texttt{b.to\_ulong()}：回傳一個 unsigned long 和 \texttt{b} 的內容一樣（在沒有溢位的範圍內）。複雜度$O(N)$。
+\end{enumerate}
+
+bitset 不是容器，而且它也沒有迭代器。
+
+通常而言，如果要估計常數的話，相較於直接使用陣列，空間是 1/8、count 約是 1/6、位元運算約是 1/30。當然這些都不是絕對的。
+
+要注意的是，上述的複雜度沒有明文規定，不過通常是如此。
+
+\chapter{亂數 Random Number}
 在寫程式時候，我們有時候會需要生成一定範圍內的亂數來完成某些任務。例如：寫一個抽籤程式、模擬擲骰子的過程、寫一個換位子的程式等等。亂數甚至還可以用來估算圓周率和解線性規劃問題等等。
 
 在本章中，我們會講到要如何在程式中引入亂數。
@@ -1049,7 +1342,8 @@ void srand(unsigned int seed)
 }
 \end{minted}
 \end{code}
-在\autoref{code:randsrc}~中，我們可以發現rand是透過固定的運算產生下一個數字，而且亂數會有一個最大值\texttt{RAND\_MAX}。以這種方式產生的亂數稱為偽隨機亂數，但是一般來說，rand()函數對於一般的任務已經足夠了。
+在\autoref{code:randsrc}~中，我們可以發現\texttt{rand()}是透過固定的運算產生下一個數字，而且亂數會有一個最大值\texttt{RAND\_MAX}。以這種方式產生的亂數稱為偽隨機亂數，但是一般來說，\texttt{rand()}函數對於一般的任務已經足夠了。
+
 \chapter{二分搜尋 Binary Search}
 在一群資料中搜尋某個資料，通常有\textbf{線性搜尋}和\textbf{二分搜尋}兩種。線性搜尋就是利用迴圈，從頭到尾的搜尋某個資料。對於沒有排序過的資料，線性搜尋是唯一的方法。但如果資料已經按照大小順序排列好了，我們就可以使用二分搜尋。使用二分搜尋($O(\log N)$)的效率相較於線性搜尋($O(N)$)好太多了。
 
@@ -1206,7 +1500,7 @@ int main() {
 \end{code}
 
 這個程式可以跑，只要你不要輸入太大的數字。如果輸入 $40$ 大概會看到螢幕停頓一下就跑出來，輸入 $60$ 的話肯定可以去喝杯咖啡再看看跑出來沒；如果輸入 100，跑到你死了也跑不出來；如果輸入$200$，那到地球毀滅也跑不出來。原因何在？這是一個純遞
-迴的程式，一個遞迴呼叫兩個，兩個就會呼叫四個，雖然 $f(n-1)$與 $f(n-2)$並不一樣，但它會接近 $2^n$，確切的時間複雜度大概是 $O(1.6n)$\footnote{如果想知道這個時間複雜度是怎麼算出來的話可以查查看主定理(master theorem)}。我們來把它改成DP，所以要進行第三步驟：找出子問題的計算順序來避免以遞迴的方式進行計算。什麼樣的計算順序會讓我們可以不需要遞迴呢？原則上「只要讓遞迴式等號右邊出現的在左邊的之前先算，並且用表格把算過的記下來，就可以不需要遞迴了。」
+迴的程式，一個遞迴呼叫兩個，兩個就會呼叫四個，雖然 $f(n-1)$與 $f(n-2)$並不一樣，但它會接近 $2^n$，確切的時間複雜度大概是 $O(1.6n)$\footnote{如果想知道這個時間複雜度是怎麼算出來的話可以查查看主定理(master theorem)}。我們來把它改成DP，所以要進行第三步驟：找出子問題的計算順序來避免以遞迴的方式進行計算。什麼樣的計算順序會讓我們可以不需要遞迴呢？原則上「只要讓遞迴式等號右邊出現的在左邊的之前先算，並且用表格把算過的記下來，就可以不需要遞迴了」。
 
 以這一題為例，遞迴式 $f(n)=f(n-1)+f(n-2)$，如果 $n$ 從小往大算，算到 $f(n)$的時候，$f(n-1)$與 $f(n-2)$都已經算過了，所以只要當初算完的時候有記下來，那就可以直接從表格中取出 $f(n-1)$與 $f(n-2)$來相加得到 $f(n)$，完全不需要用到遞迴。那麼如何用表格紀錄呢？這一題我們可以開一個陣列 \texttt{F[]}，以 \texttt{F[i]}記錄 $f(i)$的值，程式就變成一個簡單的迴圈，沿著我們的計算順序($n$ 從小到大)，逐步從表格中取出值，計算後存入表格，程式如\autoref{code:memo_rec}。
 
@@ -1334,6 +1628,7 @@ DP 子問題的遞迴關係式也有人稱為「狀態轉移」，這個名詞�
 \label{code:topdown}
 \caption{熊熊上樓梯的Top-down memoization寫法}
 \begin{minted}
+
 #include <iostream>
 
 using namespace std;
